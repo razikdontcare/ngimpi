@@ -295,15 +295,10 @@ class _GoalFormState extends State<GoalForm> {
                       Icons.calendar_month,
                       color: Colors.white70,
                     ),
-                    label: Flexible(
-                      child: Text(
-                        'Kapan mau mulai? ${DateFormat('dd MMM yyyy', 'id').format(_startDate)}',
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: Colors.white,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                    label: Text(
+                      'Kapan mau mulai? ${DateFormat('dd MMM yyyy', 'id').format(_startDate)}',
+                      style: const TextStyle(fontSize: 12, color: Colors.white),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],

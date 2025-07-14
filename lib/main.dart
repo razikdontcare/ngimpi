@@ -194,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _quickAddSaving(Goal goal, int amount) {
+  void _quickAddSaving(Goal goal, int amount, {bool showSnackbar = true}) {
     setState(() {
       final idx = _goals.indexWhere((g) => g.id == goal.id);
       if (idx != -1) {
@@ -206,16 +206,18 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     _saveGoals();
 
-    // Show a snackbar to confirm the action
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          'Mantap! +${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(amount)} ke ${goal.name} 🎉',
+    // Show a snackbar to confirm the action only if requested
+    if (showSnackbar) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Mantap! +${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(amount)} ke ${goal.name} 🎉',
+          ),
+          duration: const Duration(seconds: 2),
+          backgroundColor: Theme.of(context).colorScheme.secondary,
         ),
-        duration: const Duration(seconds: 2),
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-      ),
-    );
+      );
+    }
   }
 
   @override
