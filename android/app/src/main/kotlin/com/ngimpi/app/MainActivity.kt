@@ -1,4 +1,4 @@
-package com.example.ngimpi
+package com.ngimpi.app
 
 import io.flutter.embedding.android.FlutterActivity
 
