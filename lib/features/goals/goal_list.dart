@@ -87,376 +87,421 @@ class GoalList extends StatelessWidget {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(12),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Celebration banner for completed goals
-                                if (isCompleted) ...[
-                                  Container(
-                                    width: double.infinity,
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 6,
-                                      horizontal: 12,
-                                    ),
-                                    margin: const EdgeInsets.only(bottom: 8),
-                                    decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                        colors: [
-                                          Colors.amber.withValues(alpha: 0.8),
-                                          Colors.orange.withValues(alpha: 0.8),
-                                        ],
-                                      ),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        const Icon(
-                                          Icons.celebration,
-                                          color: Colors.white,
-                                          size: 20,
-                                        ),
-                                        const SizedBox(width: 8),
-                                        Flexible(
-                                          child: Text(
-                                            'Goal Tercapai! 🎯✨',
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 14,
+                            child: LayoutBuilder(
+                              builder: (context, constraints) {
+                                return SingleChildScrollView(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      // Celebration banner for completed goals
+                                      if (isCompleted) ...[
+                                        Container(
+                                          width: double.infinity,
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 4,
+                                            horizontal: 8,
+                                          ),
+                                          margin: const EdgeInsets.only(
+                                            bottom: 2,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            gradient: LinearGradient(
+                                              colors: [
+                                                Colors.amber.withValues(
+                                                  alpha: 0.8,
+                                                ),
+                                                Colors.orange.withValues(
+                                                  alpha: 0.8,
+                                                ),
+                                              ],
                                             ),
-                                            textAlign: TextAlign.center,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Stack(
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                            12,
-                                          ),
-                                          child: goal.imagePath != null
-                                              ? Image.file(
-                                                  File(goal.imagePath!),
-                                                  width: 60,
-                                                  height: 60,
-                                                  fit: BoxFit.cover,
-                                                )
-                                              : Container(
-                                                  width: 60,
-                                                  height: 60,
-                                                  decoration: BoxDecoration(
-                                                    color: Theme.of(
-                                                      context,
-                                                    ).colorScheme.surface,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          12,
-                                                        ),
-                                                  ),
-                                                  child: Icon(
-                                                    Icons.image_outlined,
-                                                    size: 30,
-                                                    color: Colors.white
-                                                        .withValues(alpha: 0.5),
-                                                  ),
-                                                ),
-                                        ),
-                                        // Achievement badge for completed goals
-                                        if (isCompleted)
-                                          Positioned(
-                                            top: -5,
-                                            right: -5,
-                                            child: Container(
-                                              padding: const EdgeInsets.all(4),
-                                              decoration: BoxDecoration(
-                                                color: Colors.amber,
-                                                shape: BoxShape.circle,
-                                                border: Border.all(
-                                                  color: Colors.white,
-                                                  width: 2,
-                                                ),
-                                              ),
-                                              child: const Icon(
-                                                Icons.check,
-                                                color: Colors.white,
-                                                size: 16,
-                                              ),
+                                            borderRadius: BorderRadius.circular(
+                                              12,
                                             ),
                                           ),
-                                      ],
-                                    ),
-                                    const SizedBox(width: 16),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
-                                              Expanded(
+                                              const Icon(
+                                                Icons.celebration,
+                                                color: Colors.white,
+                                                size: 20,
+                                              ),
+                                              const SizedBox(width: 8),
+                                              Flexible(
                                                 child: Text(
-                                                  goal.name,
-                                                  style: TextStyle(
+                                                  'Goal Tercapai! 🎯✨',
+                                                  style: const TextStyle(
+                                                    color: Colors.white,
                                                     fontWeight: FontWeight.bold,
-                                                    fontSize: 20,
-                                                    decoration: isCompleted
-                                                        ? TextDecoration.none
-                                                        : null,
+                                                    fontSize: 14,
                                                   ),
+                                                  textAlign: TextAlign.center,
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          const SizedBox(height: 4),
-                                          Text(
-                                            'Budget: ${NumberFormat.currency(locale: 'id', symbol: 'Rp').format(goal.targetPrice)}',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              color: Colors.white.withValues(
-                                                alpha: 0.8,
+                                        ),
+                                      ],
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Stack(
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(12),
+                                                child: goal.imagePath != null
+                                                    ? Image.file(
+                                                        File(goal.imagePath!),
+                                                        width: 60,
+                                                        height: 60,
+                                                        fit: BoxFit.cover,
+                                                      )
+                                                    : Container(
+                                                        width: 60,
+                                                        height: 60,
+                                                        decoration: BoxDecoration(
+                                                          color: Theme.of(
+                                                            context,
+                                                          ).colorScheme.surface,
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                12,
+                                                              ),
+                                                        ),
+                                                        child: Icon(
+                                                          Icons.image_outlined,
+                                                          size: 30,
+                                                          color: Colors.white
+                                                              .withValues(
+                                                                alpha: 0.5,
+                                                              ),
+                                                        ),
+                                                      ),
                                               ),
+                                              // Achievement badge for completed goals
+                                              if (isCompleted)
+                                                Positioned(
+                                                  top: -5,
+                                                  right: -5,
+                                                  child: Container(
+                                                    padding:
+                                                        const EdgeInsets.all(4),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.amber,
+                                                      shape: BoxShape.circle,
+                                                      border: Border.all(
+                                                        color: Colors.white,
+                                                        width: 2,
+                                                      ),
+                                                    ),
+                                                    child: const Icon(
+                                                      Icons.check,
+                                                      color: Colors.white,
+                                                      size: 16,
+                                                    ),
+                                                  ),
+                                                ),
+                                            ],
+                                          ),
+                                          const SizedBox(width: 16),
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: Text(
+                                                        goal.name,
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 20,
+                                                          decoration:
+                                                              isCompleted
+                                                              ? TextDecoration
+                                                                    .none
+                                                              : null,
+                                                        ),
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(height: 4),
+                                                Text(
+                                                  'Budget: ${NumberFormat.currency(locale: 'id', symbol: 'Rp').format(goal.targetPrice)}',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Colors.white
+                                                        .withValues(alpha: 0.8),
+                                                  ),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ],
                                             ),
-                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          PopupMenuButton<String>(
+                                            onSelected: (value) {
+                                              if (value == 'edit') onEdit(goal);
+                                              if (value == 'delete')
+                                                onDelete(goal);
+                                              if (value == 'add')
+                                                onAddSaving(goal);
+                                            },
+                                            itemBuilder: (context) => [
+                                              const PopupMenuItem(
+                                                value: 'edit',
+                                                child: Text('Edit'),
+                                              ),
+                                              const PopupMenuItem(
+                                                value: 'delete',
+                                                child: Text('Hapus'),
+                                              ),
+                                            ],
+                                            icon: Icon(
+                                              Icons.more_vert,
+                                              color: Colors.white,
+                                            ),
                                           ),
                                         ],
                                       ),
-                                    ),
-                                    PopupMenuButton<String>(
-                                      onSelected: (value) {
-                                        if (value == 'edit') onEdit(goal);
-                                        if (value == 'delete') onDelete(goal);
-                                        if (value == 'add') onAddSaving(goal);
-                                      },
-                                      itemBuilder: (context) => [
-                                        const PopupMenuItem(
-                                          value: 'edit',
-                                          child: Text('Edit'),
-                                        ),
-                                        const PopupMenuItem(
-                                          value: 'delete',
-                                          child: Text('Hapus'),
-                                        ),
-                                      ],
-                                      icon: Icon(
-                                        Icons.more_vert,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 12),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 3,
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
+                                      SizedBox(height: isCompleted ? 8 : 12),
+                                      Row(
                                         children: [
-                                          Flexible(
+                                          Expanded(
+                                            flex: 3,
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Flexible(
+                                                  child: Text(
+                                                    'Progress: ${(goal.progress * 100).toStringAsFixed(1)}%',
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      color: isCompleted
+                                                          ? Colors
+                                                                .green
+                                                                .shade300
+                                                          : Colors.white
+                                                                .withValues(
+                                                                  alpha: 0.8,
+                                                                ),
+                                                      fontWeight: isCompleted
+                                                          ? FontWeight.bold
+                                                          : FontWeight.normal,
+                                                    ),
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                ),
+                                                if (isCompleted) ...[
+                                                  const SizedBox(width: 4),
+                                                  const Icon(
+                                                    Icons.emoji_events,
+                                                    color: Colors.amber,
+                                                    size: 18,
+                                                  ),
+                                                ],
+                                              ],
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 2,
                                             child: Text(
-                                              'Progress: ${(goal.progress * 100).toStringAsFixed(1)}%',
+                                              NumberFormat.currency(
+                                                locale: 'id',
+                                                symbol: 'Rp',
+                                              ).format(goal.savedSoFar),
                                               style: TextStyle(
                                                 fontSize: 14,
+                                                fontWeight: FontWeight.bold,
+                                                color: isCompleted
+                                                    ? Colors.green.shade300
+                                                    : Colors.white,
+                                              ),
+                                              textAlign: TextAlign.end,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 8),
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: LinearProgressIndicator(
+                                          value: goal.progress,
+                                          minHeight: 12,
+                                          backgroundColor: Theme.of(
+                                            context,
+                                          ).colorScheme.surface,
+                                          color: isCompleted
+                                              ? Colors.green.shade400
+                                              : Theme.of(
+                                                  context,
+                                                ).colorScheme.secondary,
+                                        ),
+                                      ),
+                                      SizedBox(height: isCompleted ? 8 : 12),
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            isCompleted
+                                                ? Icons.check_circle
+                                                : Icons.calendar_today,
+                                            size: 16,
+                                            color: isCompleted
+                                                ? Colors.green.shade300
+                                                : Colors.white.withValues(
+                                                    alpha: 0.7,
+                                                  ),
+                                          ),
+                                          const SizedBox(width: 8),
+                                          Expanded(
+                                            child: Text(
+                                              isCompleted
+                                                  ? 'Udah kelar nih! 🎯'
+                                                  : 'Estimasi kelar: ${DateFormat('dd MMM yyyy', 'id').format(goal.estimatedFinishDate)}',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w500,
                                                 color: isCompleted
                                                     ? Colors.green.shade300
                                                     : Colors.white.withValues(
-                                                        alpha: 0.8,
+                                                        alpha: 0.7,
                                                       ),
-                                                fontWeight: isCompleted
-                                                    ? FontWeight.bold
-                                                    : FontWeight.normal,
                                               ),
                                               overflow: TextOverflow.ellipsis,
                                             ),
                                           ),
-                                          if (isCompleted) ...[
-                                            const SizedBox(width: 4),
-                                            const Icon(
-                                              Icons.emoji_events,
-                                              color: Colors.amber,
-                                              size: 18,
-                                            ),
-                                          ],
                                         ],
                                       ),
-                                    ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Text(
-                                        NumberFormat.currency(
-                                          locale: 'id',
-                                          symbol: 'Rp',
-                                        ).format(goal.savedSoFar),
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.bold,
-                                          color: isCompleted
-                                              ? Colors.green.shade300
-                                              : Colors.white,
-                                        ),
-                                        textAlign: TextAlign.end,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 8),
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: LinearProgressIndicator(
-                                    value: goal.progress,
-                                    minHeight: 12,
-                                    backgroundColor: Theme.of(
-                                      context,
-                                    ).colorScheme.surface,
-                                    color: isCompleted
-                                        ? Colors.green.shade400
-                                        : Theme.of(
-                                            context,
-                                          ).colorScheme.secondary,
-                                  ),
-                                ),
-                                const SizedBox(height: 12),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      isCompleted
-                                          ? Icons.check_circle
-                                          : Icons.calendar_today,
-                                      size: 16,
-                                      color: isCompleted
-                                          ? Colors.green.shade300
-                                          : Colors.white.withValues(alpha: 0.7),
-                                    ),
-                                    const SizedBox(width: 8),
-                                    Expanded(
-                                      child: Text(
-                                        isCompleted
-                                            ? 'Udah kelar nih! 🎯'
-                                            : 'Estimasi kelar: ${DateFormat('dd MMM yyyy', 'id').format(goal.estimatedFinishDate)}',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          color: isCompleted
-                                              ? Colors.green.shade300
-                                              : Colors.white.withValues(
-                                                  alpha: 0.7,
+                                      SizedBox(height: isCompleted ? 8 : 12),
+                                      // Quick Action Buttons (hide for completed goals)
+                                      if (!isCompleted)
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: ElevatedButton.icon(
+                                                onPressed: () =>
+                                                    onQuickAddSaving(
+                                                      goal,
+                                                      goal.savingAmount,
+                                                      showSnackbar: true,
+                                                    ),
+                                                icon: const Icon(
+                                                  Icons.add_circle_outline,
+                                                  size: 18,
                                                 ),
-                                        ),
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 16),
-                                // Quick Action Buttons (hide for completed goals)
-                                if (!isCompleted)
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: ElevatedButton.icon(
-                                          onPressed: () => onQuickAddSaving(
-                                            goal,
-                                            goal.savingAmount,
-                                            showSnackbar: true,
-                                          ),
-                                          icon: const Icon(
-                                            Icons.add_circle_outline,
-                                            size: 18,
-                                          ),
-                                          label: Text(
-                                            '${goal.savingPeriod == 'daily'
-                                                ? 'Harian'
-                                                : goal.savingPeriod == 'weekly'
-                                                ? 'Mingguan'
-                                                : 'Bulanan'}: ${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(goal.savingAmount)}',
-                                            style: const TextStyle(
-                                              fontSize: 12,
+                                                label: Text(
+                                                  '${goal.savingPeriod == 'daily'
+                                                      ? 'Harian'
+                                                      : goal.savingPeriod == 'weekly'
+                                                      ? 'Mingguan'
+                                                      : 'Bulanan'}: ${NumberFormat.currency(locale: 'id', symbol: 'Rp', decimalDigits: 0).format(goal.savingAmount)}',
+                                                  style: const TextStyle(
+                                                    fontSize: 12,
+                                                  ),
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                                style: ElevatedButton.styleFrom(
+                                                  backgroundColor:
+                                                      Theme.of(context)
+                                                          .colorScheme
+                                                          .secondary
+                                                          .withValues(
+                                                            alpha: 0.8,
+                                                          ),
+                                                  foregroundColor: Colors.white,
+                                                  padding:
+                                                      const EdgeInsets.symmetric(
+                                                        vertical: 8,
+                                                        horizontal: 12,
+                                                      ),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          20,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ),
                                             ),
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Theme.of(context)
-                                                .colorScheme
-                                                .secondary
-                                                .withValues(alpha: 0.8),
-                                            foregroundColor: Colors.white,
-                                            padding: const EdgeInsets.symmetric(
-                                              vertical: 8,
-                                              horizontal: 12,
+                                            const SizedBox(width: 8),
+                                            ElevatedButton.icon(
+                                              onPressed: () =>
+                                                  onAddSaving(goal),
+                                              icon: const Icon(
+                                                Icons.edit,
+                                                size: 18,
+                                              ),
+                                              label: const Text(
+                                                'Nabung',
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor:
+                                                    Theme.of(context)
+                                                        .colorScheme
+                                                        .primary
+                                                        .withValues(alpha: 0.8),
+                                                foregroundColor: Colors.white,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      vertical: 8,
+                                                      horizontal: 16,
+                                                    ),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                ),
+                                              ),
                                             ),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
+                                          ],
+                                        ),
+                                      // Celebration message for completed goals
+                                      if (isCompleted)
+                                        Container(
+                                          width: double.infinity,
+                                          padding: const EdgeInsets.all(6),
+                                          decoration: BoxDecoration(
+                                            color: Colors.green.withValues(
+                                              alpha: 0.2,
                                             ),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 8),
-                                      ElevatedButton.icon(
-                                        onPressed: () => onAddSaving(goal),
-                                        icon: const Icon(Icons.edit, size: 18),
-                                        label: const Text(
-                                          'Nabung',
-                                          style: TextStyle(fontSize: 12),
-                                        ),
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Theme.of(context)
-                                              .colorScheme
-                                              .primary
-                                              .withValues(alpha: 0.8),
-                                          foregroundColor: Colors.white,
-                                          padding: const EdgeInsets.symmetric(
-                                            vertical: 8,
-                                            horizontal: 16,
-                                          ),
-                                          shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.circular(
-                                              20,
+                                              12,
+                                            ),
+                                            border: Border.all(
+                                              color: Colors.green.withValues(
+                                                alpha: 0.3,
+                                              ),
                                             ),
                                           ),
+                                          child: Text(
+                                            "🌟 Keren banget! Mimpi kamu udah tercapai nih! Waktunya nikmatin hasil jerih payah atau bikin goal baru lagi! 💪✨",
+                                            style: TextStyle(
+                                              color: Colors.green.shade300,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 14,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
                                         ),
-                                      ),
                                     ],
                                   ),
-                                // Celebration message for completed goals
-                                if (isCompleted)
-                                  Container(
-                                    width: double.infinity,
-                                    padding: const EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                      color: Colors.green.withValues(
-                                        alpha: 0.2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(12),
-                                      border: Border.all(
-                                        color: Colors.green.withValues(
-                                          alpha: 0.3,
-                                        ),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      "🌟 Keren banget! Mimpi kamu udah tercapai nih! Waktunya nikmatin hasil jerih payah atau bikin goal baru lagi! 💪✨",
-                                      style: TextStyle(
-                                        color: Colors.green.shade300,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 14,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                              ],
+                                );
+                              },
                             ),
                           ),
                         ),
