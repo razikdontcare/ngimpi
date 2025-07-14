@@ -7,6 +7,7 @@ import 'services/font_service.dart';
 import 'features/goals/goal_form.dart';
 import 'features/goals/goal_list.dart';
 import 'widgets/add_saving_dialog.dart';
+import 'screens/about_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -174,6 +175,32 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.more_vert),
+            onSelected: (String value) {
+              if (value == 'about') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AboutScreen()),
+                );
+              }
+            },
+            itemBuilder: (BuildContext context) => [
+              const PopupMenuItem<String>(
+                value: 'about',
+                child: Row(
+                  children: [
+                    Icon(Icons.info_outline, color: Colors.white70),
+                    SizedBox(width: 12),
+                    Text('Tentang'),
+                  ],
+                ),
+              ),
+            ],
+            color: const Color(0xFF2C2C4E),
+          ),
+        ],
       ),
       body: Container(
         decoration: const BoxDecoration(
