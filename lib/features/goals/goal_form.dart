@@ -35,7 +35,7 @@ class _GoalFormState extends State<GoalForm> {
   late TextEditingController _nameController;
   late TextEditingController _targetController;
   late TextEditingController _savingController;
-  bool _isDaily = true;
+  String _savingPeriod = 'daily'; // 'daily', 'weekly', 'monthly'
   DateTime _startDate = DateTime.now();
   String? _imagePath;
 
@@ -49,7 +49,7 @@ class _GoalFormState extends State<GoalForm> {
     _savingController = TextEditingController(
       text: widget.goal?.savingAmount.toString() ?? '',
     );
-    _isDaily = widget.goal?.isDaily ?? true;
+    _savingPeriod = widget.goal?.savingPeriod ?? 'daily';
     _startDate = widget.goal?.startDate ?? DateTime.now();
     _imagePath = widget.goal?.imagePath;
   }
@@ -84,7 +84,7 @@ class _GoalFormState extends State<GoalForm> {
         name: _nameController.text,
         targetPrice: int.parse(_targetController.text),
         savingAmount: int.parse(_savingController.text),
-        isDaily: _isDaily,
+        savingPeriod: _savingPeriod,
         startDate: _startDate,
         savedSoFar: widget.goal?.savedSoFar ?? 0,
         imagePath: _imagePath,
@@ -126,7 +126,7 @@ class _GoalFormState extends State<GoalForm> {
               ),
               Center(
                 child: Text(
-                  widget.goal == null ? 'Tambah Impian' : 'Edit Impian',
+                  widget.goal == null ? 'Yuk Ngimpi! ✨' : 'Edit Mimpi Kamu 💫',
                   style: FontService.getSafeTextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -144,7 +144,7 @@ class _GoalFormState extends State<GoalForm> {
                 controller: _nameController,
                 style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
-                  labelText: 'Nama Impian',
+                  labelText: 'Ngimpi apa nih? 🤔',
                   labelStyle: const TextStyle(color: Colors.white70),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -168,14 +168,15 @@ class _GoalFormState extends State<GoalForm> {
                   filled: true,
                   fillColor: Colors.white.withValues(alpha: 0.1),
                 ),
-                validator: (v) => v == null || v.isEmpty ? 'Wajib diisi' : null,
+                validator: (v) =>
+                    v == null || v.isEmpty ? 'Wajib isi ya!' : null,
               ),
               const SizedBox(height: 14),
               TextFormField(
                 controller: _targetController,
                 style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
-                  labelText: 'Harga Target (IDR)',
+                  labelText: 'Butuh budget berapa? 💰',
                   labelStyle: const TextStyle(color: Colors.white70),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -200,16 +201,19 @@ class _GoalFormState extends State<GoalForm> {
                   fillColor: Colors.white.withValues(alpha: 0.1),
                 ),
                 keyboardType: TextInputType.number,
-                validator: (v) => v == null || v.isEmpty ? 'Wajib diisi' : null,
+                validator: (v) =>
+                    v == null || v.isEmpty ? 'Wajib isi ya!' : null,
               ),
               const SizedBox(height: 14),
               TextFormField(
                 controller: _savingController,
                 style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
-                  labelText: _isDaily
-                      ? 'Tabungan per Hari'
-                      : 'Tabungan per Minggu',
+                  labelText: _savingPeriod == 'daily'
+                      ? 'Nabung per hari 📅'
+                      : _savingPeriod == 'weekly'
+                      ? 'Nabung per minggu 🗓️'
+                      : 'Nabung per bulan 📆',
                   labelStyle: const TextStyle(color: Colors.white70),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -234,7 +238,8 @@ class _GoalFormState extends State<GoalForm> {
                   fillColor: Colors.white.withValues(alpha: 0.1),
                 ),
                 keyboardType: TextInputType.number,
-                validator: (v) => v == null || v.isEmpty ? 'Wajib diisi' : null,
+                validator: (v) =>
+                    v == null || v.isEmpty ? 'Wajib isi ya!' : null,
               ),
               const SizedBox(height: 14),
               Column(
@@ -263,14 +268,15 @@ class _GoalFormState extends State<GoalForm> {
                         ),
                       ),
                     ),
-                    child: SegmentedButton<bool>(
+                    child: SegmentedButton<String>(
                       segments: const [
-                        ButtonSegment(value: true, label: Text('Harian')),
-                        ButtonSegment(value: false, label: Text('Mingguan')),
+                        ButtonSegment(value: 'daily', label: Text('Hari')),
+                        ButtonSegment(value: 'weekly', label: Text('Minggu')),
+                        ButtonSegment(value: 'monthly', label: Text('Bulan')),
                       ],
-                      selected: {_isDaily},
+                      selected: {_savingPeriod},
                       onSelectionChanged: (s) =>
-                          setState(() => _isDaily = s.first),
+                          setState(() => _savingPeriod = s.first),
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -289,9 +295,15 @@ class _GoalFormState extends State<GoalForm> {
                       Icons.calendar_month,
                       color: Colors.white70,
                     ),
-                    label: Text(
-                      'Mulai: ${DateFormat('dd MMM yyyy', 'id').format(_startDate)}',
-                      style: const TextStyle(fontSize: 12, color: Colors.white),
+                    label: Flexible(
+                      child: Text(
+                        'Kapan mau mulai? ${DateFormat('dd MMM yyyy', 'id').format(_startDate)}',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.white,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ),
                 ],
@@ -309,7 +321,7 @@ class _GoalFormState extends State<GoalForm> {
                         vertical: 12,
                       ),
                     ),
-                    child: const Text('Batal'),
+                    child: const Text('Nanti deh'),
                   ),
                   const SizedBox(width: 8),
                   FilledButton(
@@ -325,7 +337,7 @@ class _GoalFormState extends State<GoalForm> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: const Text('Simpan'),
+                    child: const Text('Gas! 🚀'),
                   ),
                 ],
               ),

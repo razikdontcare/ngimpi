@@ -6,7 +6,7 @@ class Goal {
   String name;
   int targetPrice;
   int savingAmount;
-  bool isDaily; // true = harian, false = mingguan
+  String savingPeriod; // 'daily', 'weekly', 'monthly'
   DateTime startDate;
   int savedSoFar;
   String? imagePath;
@@ -16,7 +16,7 @@ class Goal {
     required this.name,
     required this.targetPrice,
     required this.savingAmount,
-    required this.isDaily,
+    required this.savingPeriod,
     required this.startDate,
     this.savedSoFar = 0,
     this.imagePath,
@@ -29,9 +29,12 @@ class Goal {
   DateTime get estimatedFinishDate {
     if (savingAmount <= 0) return startDate;
     final sisa = targetPrice - savedSoFar;
-    final hari = isDaily
-        ? (sisa / savingAmount).ceil()
-        : ((sisa / savingAmount).ceil() * 7);
+    final hari = switch (savingPeriod) {
+      'daily' => (sisa / savingAmount).ceil(),
+      'weekly' => ((sisa / savingAmount).ceil() * 7),
+      'monthly' => ((sisa / savingAmount).ceil() * 30),
+      _ => (sisa / savingAmount).ceil(),
+    };
     return startDate.add(Duration(days: hari));
   }
 
@@ -41,7 +44,7 @@ class Goal {
     'name': name,
     'targetPrice': targetPrice,
     'savingAmount': savingAmount,
-    'isDaily': isDaily,
+    'savingPeriod': savingPeriod,
     'startDate': startDate.toIso8601String(),
     'savedSoFar': savedSoFar,
     'imagePath': imagePath,
@@ -53,7 +56,8 @@ class Goal {
     name: map['name'],
     targetPrice: map['targetPrice'],
     savingAmount: map['savingAmount'],
-    isDaily: map['isDaily'],
+    savingPeriod:
+        map['savingPeriod'] ?? (map['isDaily'] == true ? 'daily' : 'weekly'),
     startDate: DateTime.parse(map['startDate']),
     savedSoFar: map['savedSoFar'] ?? 0,
     imagePath: map['imagePath'],

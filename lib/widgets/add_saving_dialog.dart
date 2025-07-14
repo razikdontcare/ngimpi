@@ -31,18 +31,18 @@ class _AddSavingDialogState extends State<AddSavingDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Tambah Tabungan'),
+      title: const Text('Yuk Nabung! 💸'),
       content: TextField(
         controller: _controller,
         keyboardType: TextInputType.number,
-        decoration: const InputDecoration(labelText: 'Nominal (IDR)'),
+        decoration: const InputDecoration(labelText: 'Mau nabung berapa nih?'),
       ),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Batal'),
+          child: const Text('Nanti aja'),
         ),
-        ElevatedButton(onPressed: _submit, child: const Text('Tambah')),
+        ElevatedButton(onPressed: _submit, child: const Text('Gas nabung! 🚀')),
       ],
     );
   }

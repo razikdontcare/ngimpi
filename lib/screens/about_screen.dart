@@ -9,7 +9,7 @@ class AboutScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Tentang Ngimpi',
+          'Tentang Ngimpi ✨',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.transparent,
@@ -102,25 +102,28 @@ class AboutScreen extends StatelessWidget {
                               size: 24,
                             ),
                             const SizedBox(width: 12),
-                            Text(
-                              'Tentang Aplikasi',
-                              style: Theme.of(context).textTheme.titleLarge
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
+                            Expanded(
+                              child: Text(
+                                'Tentang App Ini 💫',
+                                style: Theme.of(context).textTheme.titleLarge
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ],
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          'Ngimpi adalah aplikasi yang membantu Anda mewujudkan impian dan tujuan finansial. '
-                          'Dengan fitur yang mudah digunakan, Anda dapat:\n\n'
-                          '• Menambahkan impian atau tujuan yang ingin dicapai\n'
-                          '• Menetapkan target harga dan menabung secara bertahap\n'
-                          '• Memantau progress tabungan dengan visual yang menarik\n'
-                          '• Menambahkan foto untuk memotivasi diri\n'
-                          '• Mengelola multiple impian sekaligus',
+                          'Ngimpi adalah app yang bakal bantuin kamu wujudin mimpi dan goal finansial kamu! '
+                          'Dengan fitur yang gampang banget dipake, kamu bisa:\n\n'
+                          '• Bikin mimpi atau goal yang pengen dicapai\n'
+                          '• Set target budget dan nabung step by step\n'
+                          '• Track progress tabungan dengan tampilan yang aesthetic\n'
+                          '• Upload foto buat motivasi diri sendiri\n'
+                          '• Manage banyak mimpi sekaligus',
                           style: Theme.of(context).textTheme.bodyLarge
                               ?.copyWith(color: Colors.white, height: 1.6),
                         ),
@@ -148,13 +151,16 @@ class AboutScreen extends StatelessWidget {
                               size: 24,
                             ),
                             const SizedBox(width: 12),
-                            Text(
-                              'Fitur Utama',
-                              style: Theme.of(context).textTheme.titleLarge
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
+                            Expanded(
+                              child: Text(
+                                'Fitur Unggulan 🚀',
+                                style: Theme.of(context).textTheme.titleLarge
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ],
                         ),
@@ -162,26 +168,26 @@ class AboutScreen extends StatelessWidget {
                         _buildFeatureItem(
                           context,
                           Icons.add_circle_outline,
-                          'Buat Impian Baru',
-                          'Tambahkan impian dengan target harga dan deskripsi',
+                          'Ngimpi',
+                          'Tambahin mimpi dengan target budget yang realistis',
                         ),
                         _buildFeatureItem(
                           context,
                           Icons.savings_outlined,
-                          'Tabungan Bertahap',
-                          'Catat setiap tabungan untuk mencapai target',
+                          'Nabung Step by Step',
+                          'Catat setiap nabungan buat capai target kamu',
                         ),
                         _buildFeatureItem(
                           context,
                           Icons.photo_camera_outlined,
-                          'Upload Foto',
-                          'Tambahkan foto impian untuk motivasi ekstra',
+                          'Upload Foto Kece',
+                          'Tambahin foto mimpi kamu buat motivasi extra boost',
                         ),
                         _buildFeatureItem(
                           context,
                           Icons.track_changes_outlined,
-                          'Progress Tracking',
-                          'Lihat kemajuan tabungan dengan progress bar',
+                          'Progress Tracking Real-time',
+                          'Liat kemajuan tabungan dengan progress bar yang aesthetic',
                         ),
                       ],
                     ),
@@ -207,13 +213,16 @@ class AboutScreen extends StatelessWidget {
                               size: 24,
                             ),
                             const SizedBox(width: 12),
-                            Text(
-                              'Developer',
-                              style: Theme.of(context).textTheme.titleLarge
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
+                            Expanded(
+                              child: Text(
+                                'Developer Info 👨‍💻',
+                                style: Theme.of(context).textTheme.titleLarge
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ],
                         ),
@@ -221,7 +230,7 @@ class AboutScreen extends StatelessWidget {
                         Text(
                           'Developed by: @razikdontcare\n'
                           'Made with ❤️ using Flutter\n\n'
-                          'Dibuat untuk membantu mewujudkan impian Anda',
+                          'Dibuat khusus buat bantuin kalian wujudin mimpi! Keep hustling! 💪',
                           style: Theme.of(context).textTheme.bodyLarge
                               ?.copyWith(color: Colors.white, height: 1.6),
                         ),
@@ -235,13 +244,16 @@ class AboutScreen extends StatelessWidget {
                               size: 20,
                             ),
                             const SizedBox(width: 8),
-                            Text(
-                              'Source Code:',
-                              style: Theme.of(context).textTheme.titleSmall
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                  ),
+                            Expanded(
+                              child: Text(
+                                'GitHub Repository:',
+                                style: Theme.of(context).textTheme.titleSmall
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                    ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ],
                         ),
@@ -276,7 +288,7 @@ class AboutScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 8),
                                 Text(
-                                  'View on GitHub',
+                                  'Cek Source Code',
                                   style: Theme.of(context).textTheme.bodyMedium
                                       ?.copyWith(
                                         color: Theme.of(
@@ -322,7 +334,7 @@ class AboutScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 8),
                                 Text(
-                                  'Report Issues',
+                                  'Report Bug/Issue',
                                   style: Theme.of(context).textTheme.bodyMedium
                                       ?.copyWith(
                                         color: Theme.of(
